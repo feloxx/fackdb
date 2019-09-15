@@ -2,7 +2,8 @@ package org.cdp.fackdb.core
 
 import akka.actor.{Actor, Status}
 import akka.event.Logging
-import org.cdp.fackdb.entity.message.{GetRequest, KeyNotFoundException, SetRequest}
+import org.cdp.fackdb.entity.exception.KeyNotFoundException
+import org.cdp.fackdb.entity.message.{DeleteRequest, GetRequest, KeyIfNotExists, SetRequest}
 import scala.collection.mutable
 
 /**
@@ -15,10 +16,20 @@ class FackDb extends Actor {
   val log = Logging(context.system, this)
 
   override def receive: Receive = {
+    case KeyIfNotExists(k) =>
+      log.info(s"received KeyIfNotExists- key: $k")
+      if (synchronized(fackMap.contains(k)) ) {
+        sender() ! Status.Success
+      } else {
+        sender() ! Status.Failure(KeyNotFoundException(k))
+      }
     case SetRequest(k, v) =>
       log.info(s"received SetRequest - key: $k, value: $v")
       fackMap.put(k, v)
       sender() ! Status.Success
+    case DeleteRequest(k) =>
+      log.info(s"received DeleteRequest - key: $k")
+      synchronized(fackMap -= k)
     case GetRequest(k) =>
       log.info(s"received GetRequest - key : $k")
       val response: Option[Any] = fackMap.get(k)
