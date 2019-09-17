@@ -1,6 +1,6 @@
 name := "fackdb"
 
-version := "0.0.1-SNAPSHOT"
+version := "1.0.0-SNAPSHOT"
 
 scalaVersion := "2.11.12"
 
@@ -11,6 +11,8 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.0.3" % "test"
 )
 
-mappings in (Compile, packageBin) ~= { _.filterNot { case (_, n) =>
-  Seq("application.conf").contains(n)
-}}
+mappings in(Compile, packageBin) ~= {
+  _.filterNot { case (_, n) =>
+    Seq("application.conf").contains(n)
+  }
+}
