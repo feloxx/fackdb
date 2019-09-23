@@ -2,8 +2,8 @@ package org.cdp.fackdb.core
 
 import akka.actor.{Actor, Status}
 import akka.event.Logging
-import org.cdp.fackdb.entity.exception.KeyNotFoundException
-import org.cdp.fackdb.entity.message.{DeleteRequest, GetRequest, KeyIfNotExists, SetRequest}
+import org.cdp.fackdb.exception.KeyNotFoundException
+import org.cdp.fackdb.message.{DeleteRequest, GetRequest, KeyIfNotExists, SetRequest}
 import scala.collection.mutable
 
 /**

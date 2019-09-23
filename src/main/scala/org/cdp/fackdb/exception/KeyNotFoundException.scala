@@ -1,4 +1,4 @@
-package org.cdp.fackdb.entity.exception
+package org.cdp.fackdb.exception
 
 /**
   * 自定义错误逻辑，k不存在异常

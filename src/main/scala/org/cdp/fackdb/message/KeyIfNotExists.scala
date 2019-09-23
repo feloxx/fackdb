@@ -1,4 +1,4 @@
-package org.cdp.fackdb.entity.message
+package org.cdp.fackdb.message
 
 /**
   * 原子判断k如果不存在

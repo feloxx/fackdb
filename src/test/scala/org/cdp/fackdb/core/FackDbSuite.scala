@@ -3,7 +3,7 @@ package org.cdp.fackdb.core
 import akka.pattern.ask
 import akka.actor.ActorSystem
 import akka.testkit.TestActorRef
-import org.cdp.fackdb.entity.message.{GetRequest, KeyIfNotExists, SetRequest}
+import org.cdp.fackdb.message.{GetRequest, KeyIfNotExists, SetRequest}
 import akka.util.Timeout
 import org.scalatest.{FunSpecLike, FunSuite, Matchers}
 

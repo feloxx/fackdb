@@ -1,4 +1,4 @@
-package org.cdp.fackdb.entity.message
+package org.cdp.fackdb.message
 
 /**
   * 原子删除一个key

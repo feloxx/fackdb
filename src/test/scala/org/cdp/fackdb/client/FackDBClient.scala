@@ -4,7 +4,7 @@ import akka.actor.{ActorSelection, ActorSystem}
 import akka.pattern.ask
 import akka.util.Timeout
 import com.typesafe.config.{Config, ConfigFactory}
-import org.cdp.fackdb.entity.message.{GetRequest, SetRequest}
+import org.cdp.fackdb.message.{GetRequest, SetRequest}
 import scala.concurrent.Future
 import scala.concurrent.duration._
 
@@ -19,6 +19,7 @@ class FackDbClient(remoteAddress: String) {
 
   implicit val timeout: Timeout = Timeout(10.seconds)
 
+  // 加载字符串形式的配置文件
   val config: Config = ConfigFactory.parseString(
     """
       |akka {
@@ -27,6 +28,8 @@ class FackDbClient(remoteAddress: String) {
       |  }
       |}
     """.stripMargin)
+
+  // 创建actorSystem时，并使用字符串的配置文件
   implicit val system: ActorSystem = ActorSystem.create("LocalSystem", config)
 
   val remoteFackDb: ActorSelection = system.actorSelection(s"akka.tcp://fackSystem@$remoteAddress/user/fackDb")
